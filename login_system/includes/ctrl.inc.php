@@ -30,7 +30,7 @@ class Control {
         return strlen($this->password) < $this->min_password_len();
     }
     public function create_user() {
-        $this->user = set_user($conn, $username, $password);
+        $this->user = set_user($this->conn, $this->username, $this->password);
     }
     public function login_user() {
         if ($this->user !== null) {
