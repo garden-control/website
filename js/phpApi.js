@@ -1,10 +1,9 @@
-const url_phpApi = "http://localhost:80/clima_care";
 
 function entrar(criar = false) {
   let tfUsername = document.getElementById("username");
   let pfPassword = document.getElementById("password");
 
-  fetch(`${url_phpApi}/webApi/${criar ? "signup.php" : "login.php"}`, {
+  fetch(`php/webApi/${criar ? "signup.php" : "login.php"}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -27,6 +26,4 @@ function entrar(criar = false) {
     });
 }
 
-function get_user_id() {
-
-}
+function get_user_id() {}

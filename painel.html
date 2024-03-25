@@ -9,7 +9,7 @@
   <body>
     <h1 id="user_id"></h1>
     <script>
-      fetch(`${url_phpApi}/webApi/get_user_id.php`)
+      fetch(`php/webApi/get_user_id.php`)
         .then((response) => response.json())
         .then((json) => {
           document.getElementById("user_id").innerHTML = (json.erro.length == 0 ? json.user_id : json.erro);
