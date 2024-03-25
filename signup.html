@@ -4,53 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signup</title>
-    <script src="js/url_phpApi.js"></script>
+    <script src="js/phpApi.js"></script>
   </head>
   <body>
     <div class="container">
-      <form id="form" method="post">
+      <div>
         <h1>Signup</h1>
         <input
           type="text"
-          name="username"
           id="username"
           placeholder="Nome de Usuário"
         />
-        <input type="password" name="password" placeholder="Senha" />
-        <input type="hidden" name="referer" id="referer" />
-        <button type="submit">Criar</button>
+        <input type="password" id="password" placeholder="Senha" />
+        <button onclick="entrar(true)">Criar</button>
         <span>ou </span>
         <a href="login.html">entre com sua conta</a>
         <ul id="erros"></ul>
       </form>
     </div>
-    <script>
-      //ação do formulário
-      document
-        .getElementById("form")
-        .setAttribute("action", url_phpApi + "/login/signup.php");
-
-      //informar o url dessa página
-      document.getElementById("referer").setAttribute("value", window.location.href);
-
-      //checar status do login e gerar formulário
-      fetch(url_phpApi + "/login/get_signup_status.php")
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.sucesso) {
-            window.location.replace("painel.html");
-          } else {
-            //preencher formulário com última tentativa
-            document
-              .getElementById("username")
-              .setAttribute("value", json.username);
-
-            //listar erros
-            document.getElementById("erros").innerHTML = json.erros
-              .map((erro) => `<li>${erro}</li>`)
-              .join("");
-          }
-        });
-    </script>
   </body>
 </html>
