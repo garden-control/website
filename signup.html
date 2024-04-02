@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signup</title>
     <script src="js/phpApi.js"></script>
+    <script>
+      function onBtnCriarClick() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        entrar(username, password, true).then((json) => {
+          if (json.erros.length == 0) {
+            window.location.href = "painel.html";
+          }
+          else {
+            let ulErros = document.getElementById("erros");
+            ulErros.innerHTML = json.erros.map((erro) => {
+              return `<li>${erro}</li>`;
+            }).join("");
+          }
+        })
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -16,7 +33,7 @@
           placeholder="Nome de Usuário"
         />
         <input type="password" id="password" placeholder="Senha" />
-        <button onclick="entrar(true)">Criar</button>
+        <button onclick="onBtnCriarClick()">Criar</button>
         <span>ou </span>
         <a href="login.html">entre com sua conta</a>
         <ul id="erros"></ul>
