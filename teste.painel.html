@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script defer src="js/phpApi.js"></script>
+    <script defer src="teste.painel.js"></script>
+  </head>
+  <body>
+    <h3>Adicionar Estação</h3>
+    <div>
+      <input type="text" id="add_estacao_id" placeholder="ID da estação" />
+      <button onclick="onBtnAdicionarEstacao()">Adicionar</button>
+    </div>
+    <h3>Criar Estação</h3>
+    <div>
+      <input type="text" id="criar_estacao_nome" placeholder="Nome" />
+      <input type="text" id="criar_estacao_localizacao" placeholder="Localização" />
+      <button onclick="onBtnCriarEstacao()">Criar</button>
+    </div>
+    <h3>Minhas estações</h3>
+    <ul id="estacoes"></ul>
+  </body>
+</html>

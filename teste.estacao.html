@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="js/phpApi.js"></script>
+    <script defer src="teste.estacao.js"></script>
+    <style>
+      * {
+        font-family: sans-serif;
+      }
+      /* Apply basic table styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      /* Style table header */
+      th {
+        background-color: #f2f2f2;
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      /* Style table cells */
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: right;
+      }
+
+      /* Alternating row colors */
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+    <title>Leituras</title>
+  </head>
+  <body>
+    <h2>
+      <span id="estacao_nome"></span> - <span id="estacao_localizacao"></span>
+    </h2>
+    <hr>
+    <h3>CLI</h3>
+    <textarea readonly id="" cols="30" rows="10"></textarea>
+    <input type="text" id="comando" placeholder="Comando">
+    <button>Enviar</button>
+    <hr>
+    <h3>Últimas leituras</h3>
+    <table id="ultimas_leituras">
+      <tr>
+        <th>ID</th>
+        <th>Umidade do Ar</th>
+        <th>Temperatura</th>
+        <th>Umidade do Solo</th>
+        <th>Índice Pluviométrico</th>
+        <th>Horário</th>
+      </tr>
+    </table>
+  </body>
+</html>
