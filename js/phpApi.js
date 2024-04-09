@@ -41,12 +41,26 @@ function getEstacoes(limite = 10) {
 }
 
 //retorna a estação adicionada
-//{erros: string[] id: string, nome: string, localizacao: string}
-function addEstacao(id_estacao, nome) {
+//{erros: string[], id: string, nome: string, localizacao: string}
+function getEstacao(id_estacao) {
   return fetch(
-    `php/webApi/add_estacao.php/?id_estacao=${encodeURIComponent(
-      id_estacao
-    )}&nome=${encodeURIComponent(nome)}`
+    `php/webApi/get_estacao.php/?id_estacao=${encodeURIComponent(id_estacao)}`
   ).then((response) => response.json());
 }
 
+//retorna a estação adicionada
+//{erros: string[], id: string, nome: string, localizacao: string}
+function addEstacao(id_estacao) {
+  return fetch(
+    `php/webApi/add_estacao.php/?id_estacao=${encodeURIComponent(id_estacao)}`
+  ).then((response) => response.json());
+}
+
+
+//retorna a estação adicionada
+//{erros: string[], id: string, nome: string, localizacao: string}
+function criarEstacao(nome, localizacao) {
+  return fetch(
+    `php/webApi/criar_estacao.php/?nome=${encodeURIComponent(nome)}&localizacao=${encodeURIComponent(localizacao)}`
+  ).then((response) => response.json());
+}

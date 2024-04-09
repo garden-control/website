@@ -12,7 +12,7 @@
         let password = document.getElementById("password").value;
         entrar(username, password).then((json) => {
           if (json.erros.length == 0) {
-            window.location.href = "painel.html";
+            window.location.href = "teste.painel.html";
           }
           else {
             let ulErros = document.getElementById("erros");
