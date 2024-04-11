@@ -64,3 +64,22 @@ function criarEstacao(nome, localizacao) {
     `php/webApi/criar_estacao.php/?nome=${encodeURIComponent(nome)}&localizacao=${encodeURIComponent(localizacao)}`
   ).then((response) => response.json());
 }
+
+function addCliEntrada(idEstacao, mensagem) {
+  return fetch(
+    "php/webApi/add_cli_entrada.php",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: (new URLSearchParams({id_estacao: idEstacao, mensagem: mensagem})).toString()
+    }
+  );
+}
+
+function getCliLog(idEstacao, idMsgMaiorQ = 0, limite = 20) {
+  return fetch(
+    `php/webApi/get_cli_log.php?${(new URLSearchParams({id_estacao: idEstacao, id_msg_maior_q: idMsgMaiorQ, limite: limite})).toString()}`
+  ).then((resposta) => resposta.json());
+}
