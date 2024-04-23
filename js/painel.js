@@ -14,7 +14,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js'
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js'
 const auth = getAuth(app);
 
 import { getDatabase, ref, child, get } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js'
@@ -38,3 +38,10 @@ onAuthStateChanged(auth, (user) => {
         window.location.href = "../login.html";
     }
 });
+
+document.getElementById("logout").addEventListener("click", () => {
+    signOut(auth)
+        .catch((error) => {
+            console.log(error);
+        })
+})
