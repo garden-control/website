@@ -1,44 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-
-    <script src="js/phpApi.js"></script>
-    <script>
-      function onBtnEntrarClick() {
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
-        entrar(username, password).then((json) => {
-          if (json.erros.length == 0) {
-            window.location.href = "teste.painel.html";
-          }
-          else {
-            let ulErros = document.getElementById("erros");
-            ulErros.innerHTML = json.erros.map((erro) => {
-              return `<li>${erro}</li>`;
-            }).join("");
-          }
-        })
-      }
-    </script>
-  </head>
-  <body>
-    <div class="container">
-      <div>
-        <h1>Login</h1>
-        <input
-          type="text"
-          id="username"
-          placeholder="Nome de Usuário"
-        />
-        <input type="password" id="password" placeholder="Senha" />
-        <button onclick="onBtnEntrarClick()">Entrar</button>
-        <span>ou </span>
-        <a href="signup.html">crie uma conta</a>
-        <ul id="erros"></ul>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<script type="module" src="js/login.js"></script>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('background.jpg'); /* Substitua 'background.jpg' pela sua imagem de fundo */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .login-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    color: #2c3e50;
+    text-align: center;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    color: #34495e;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  .form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .form-group button:hover {
+    background-color: #2ecc71;
+  }
+</style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+      <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" name="email" required>
       </div>
-    </div>
-  </body>
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="form-group">
+        <button id="btnEntrar">Entrar</button>
+      </div>
+      <a href="signup.html">criar</a>
+  </div>
+</body>
 </html>
