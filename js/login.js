@@ -21,7 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 
-import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js'
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js'
 
 const auth = getAuth(app);
 
@@ -35,13 +35,16 @@ document.getElementById("btnEntrar").addEventListener("click", () => {
             const user = userCredential.user;
             // ...
             console.log(user.uid);
-
-            window.location.href = "../painel.html";
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorMessage);
         });
+})
 
+onAuthStateChanged(auth, (user) => {
+    if (user != null) {
+        window.location.href = "painel.html";
+    }
 })
