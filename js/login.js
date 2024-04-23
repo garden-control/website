@@ -34,7 +34,9 @@ document.getElementById("btnEntrar").addEventListener("click", () => {
             // Signed in 
             const user = userCredential.user;
             // ...
-            console.log(user);
+            console.log(user.uid);
+
+            window.location.href = "../painel.html";
         })
         .catch((error) => {
             const errorCode = error.code;
