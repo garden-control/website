@@ -4,7 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-<style>
+
+    <script src="js/phpApi.js"></script>
+    <script>
+      function onBtnEntrarClick() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        entrar(username, password).then((json) => {
+          if (json.erros.length == 0) {
+            window.location.href = "teste.painel.html";
+          }
+          else {
+            let ulErros = document.getElementById("erros");
+            ulErros.innerHTML = json.erros.map((erro) => {
+              return `<li>${erro}</li>`;
+            }).join("");
+          }
+        })
+      }
+      <style>
   body {
     font-family: 'Arial', sans-serif;
     background-image: url('G.JPG');  
@@ -65,23 +83,6 @@
     background-color: #2ecc71;
   }
   </style>
-    <script src="js/phpApi.js"></script>
-    <script>
-      function onBtnEntrarClick() {
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
-        entrar(username, password).then((json) => {
-          if (json.erros.length == 0) {
-            window.location.href = "teste.painel.html";
-          }
-          else {
-            let ulErros = document.getElementById("erros");
-            ulErros.innerHTML = json.erros.map((erro) => {
-              return `<li>${erro}</li>`;
-            }).join("");
-          }
-        })
-      }
     </script>
   </head>
   <body>
