@@ -33,11 +33,39 @@ document.getElementById("btnCriar").addEventListener("click", () => {
             console.log(user.uid);
 
             const db = getDatabase(app);
-            set(ref(db, 'usuarios/' + user.uid), {
+            set(ref(db, `usuarios/${user.uid}`), {
                 nome: username,
-                email: email
+                estacoes: [
+                    {
+                        leituras: [
+                            {
+                                pluviometro: 0,
+                                temperatura: 0,
+                                umidade_ar: 0,
+                                umidade_solo: 0
+                            }
+                        ],
+                        status: {
+                            ctrl: false,
+                            bomba: false,
+                            reserv: 0,
+                            ram: 0
+                        },
+                        localizacao: "Bragança Pta",
+                        nome: "Estação 1"
+                    }
+                ]
             });
-
+            set(ref(db, `usuarios/${user.uid}/estacoes/0/usuarios/${user.uid}`), {
+                cli: {
+                    cmd: "",
+                    log: [
+                        "> comando",
+                        "resposta"
+                    ]
+                },
+                permissao: 2
+            })
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -50,6 +78,6 @@ document.getElementById("btnCriar").addEventListener("click", () => {
 
 onAuthStateChanged(auth, (user) => {
     if (user != null) {
-        window.location.href = "../painel.html";
+        window.location.href = "painel.html";
     }
 })
