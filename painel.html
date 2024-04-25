@@ -5,10 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel</title>
     <script type="module" src="js/painel.js"></script>
+    <style>
+        #lsEstacoes {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        #lsEstacoes > a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+        .li-estacao {
+            width: 500px;
+            background-color: lightgray;
+            border-radius: 5px;
+
+            padding: 10px;
+
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            align-items: center;
+        }
+        .li-estacao-infos {
+            display: flex;
+            flex-direction: column;            
+        }
+        .li-estacao-infos > * {
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1 id="ola"></h1>
-    <h2></h2>
-    <button id="logout">&lt;= Sair</button>
+    <hr>
+    <h2>Estações</h2>
+    <ol id="lsEstacoes"></ol>
+    <button id="btnLogout">&lt;= Sair</button>
 </body>
 </html>

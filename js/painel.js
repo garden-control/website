@@ -25,7 +25,8 @@ onAuthStateChanged(auth, (user) => {
         const db = getDatabase(app);
         const dbRef = ref(db);
 
-        get(child(dbRef, 'usuarios/' + user.uid))
+        //pegar nome de usuario
+        get(child(dbRef, `usuarios/${user.uid}`))
         .then((snapshot) => {
             console.log(snapshot.val());
             document.getElementById("ola").innerText = "Bem vindo, " + snapshot.val().nome;
@@ -33,13 +34,35 @@ onAuthStateChanged(auth, (user) => {
         .catch((error) => {
             console.error(error);
         })
+
+        //listar estacoes
+        get(child(dbRef, `usuarios/${user.uid}/estacoes`))
+        .then((snapshot) => {
+            console.log(snapshot.val());
+
+            document.getElementById("lsEstacoes").innerHTML = snapshot.val().map((estacao, idx) => {
+                return `
+                    <a href="estacao_grafico.html?idEstacao=${idx}">
+                        <li class="li-estacao">
+                            <div class="li-estacao-infos">
+                                <h3>${estacao.nome}</h3>
+                                <h4>${estacao.localizacao}</h4>
+                            </div>
+                            <h2>=></h2>
+                        </li>
+                    </a>
+                `;
+            }).join("");
+
+        })
+        .catch((error) => console.log(error))
     }
     else {
-        window.location.href = "../login.html";
+        window.location.href = "login.html";
     }
 });
 
-document.getElementById("logout").addEventListener("click", () => {
+document.getElementById("btnLogout").addEventListener("click", () => {
     signOut(auth)
         .catch((error) => {
             console.log(error);
