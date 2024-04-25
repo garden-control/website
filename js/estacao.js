@@ -1,5 +1,14 @@
 // estacao.js
 
+// adicionar a query string aos links para as outras paginas de estacao
+const urlParams = new URLSearchParams(window.location.search);
+const idEstacao = urlParams.get("idEstacao");
+document.getElementsByName("linkPainelLateral").forEach((element) => {
+    element.setAttribute("href", 
+        `${element.getAttribute("href")}?idEstacao=${idEstacao}`
+    )
+})
+
 //Seleciona os itens clicado
 var menuItem = document.querySelectorAll('.item-menu')
 
