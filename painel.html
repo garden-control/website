@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="js/phpApi.js"></script>
-  </head>
-  <body>
-    <h1 id="user_id"></h1>
-    <script>
-      fetch(`php/webApi/get_user_id.php`)
-        .then((response) => response.json())
-        .then((json) => {
-          document.getElementById("user_id").innerHTML = (json.erro.length == 0 ? json.user_id : json.erro);
-        });
-    </script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel</title>
+    <script type="module" src="js/painel.js"></script>
+</head>
+<body>
+    <h1 id="ola"></h1>
+    <h2></h2>
+    <button id="logout">&lt;= Sair</button>
+</body>
 </html>
