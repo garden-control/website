@@ -26,23 +26,31 @@ onAuthStateChanged(auth, (user) => {
     if (user != null) {
         const db = getDatabase(app);
 
-        //const q = query(ref(`usuarios/${user.uid}/estacoes/${idEstacao}/leituras`), limitToLast(10));
-        
-        onValue(ref(db, `usuarios/${user.uid}/estacoes/${idEstacao}/leituras`), (snapshot) => {
-            document.getElementById("tbLeituras").innerHTML += 
-                snapshot.val().map((leitura) => {
+        const q = query(ref(db, `usuarios/${user.uid}/estacoes/${idEstacao}/leituras`), limitToLast(5));
+
+        onValue(q, (snapshot) => {
+            console.log(Object.entries(snapshot.val()));
+            document.getElementById("tbLeituras").innerHTML =
+                `<tr>
+                    <th>ID</th>
+                    <th>Temperatura (°C)</th>
+                    <th>Umidade do Ar (%)</th>
+                    <th>Umidade do Solo (%)</th>
+                    <th>Índice pluviométrico (mm)</th>
+                </tr>` +
+                Object.entries(snapshot.val()).map((leitura) => {
                     return `
                     <tr>
-                    <td>${leitura.temperatura}</td>
-                    <td>${leitura.umidade_ar}</td>
-                    <td>${leitura.umidade_solo}</td>
-                    <td>${leitura.pluviometro}</td>
+                        <td>${leitura[1].count}</td>
+                        <td>${leitura[1].temperatura}</td>
+                        <td>${leitura[1].umidade_ar}</td>
+                        <td>${leitura[1].umidade_solo}</td>
+                        <td>${leitura[1].pluviometro}</td>
                     </tr>
                     `;
                 }).join("");
         }, {
-            onlyOnce: true
-        
+            onlyOnce: false
         })
     }
     else {
