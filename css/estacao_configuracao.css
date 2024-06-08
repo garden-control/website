@@ -1,0 +1,51 @@
+.configuracao-secao {
+    margin-top: 20px;
+}
+
+.bomba-controls, 
+#configuracaoUmidadeForm, 
+#configuracaoHorarioForm, 
+#comandoInterface {
+    margin-top: 20px;
+}
+
+.bomba-controls button, 
+#toggleUmidadeBtn, 
+#configuracaoUmidadeForm button, 
+#configuracaoHorarioForm button, 
+#executarComandoBtn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bomba-controls button:hover, 
+#toggleUmidadeBtn:hover, 
+#configuracaoUmidadeForm button:hover, 
+#configuracaoHorarioForm button:hover, 
+#executarComandoBtn:hover {
+    background-color: #218838;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="number"], 
+input[type="time"], 
+textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+textarea {
+    resize: vertical;
+}

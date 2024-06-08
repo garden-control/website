@@ -1,4 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js'
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js'
+import { getDatabase, query, onValue, ref, limitToLast } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js'
 
 const firebaseConfig = {
     apiKey: "AIzaSyCPDc7vDgHwq4ELUj8285P0l3FmmDy8sNY",
@@ -14,10 +16,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js'
 const auth = getAuth(app);
 
-import { getDatabase, query, onValue, ref, limitToLast } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js'
 
 const urlParams = new URLSearchParams(window.location.search);
 const idEstacao = urlParams.get("idEstacao");
@@ -26,9 +26,7 @@ onAuthStateChanged(auth, (user) => {
     if (user != null) {
         const db = getDatabase(app);
 
-        const q = query(ref(db, `usuarios/${user.uid}/estacoes/${idEstacao}/leituras`), limitToLast(5));
-
-        onValue(q, (snapshot) => {
+        onValue(query(ref(db, `usuarios/${user.uid}/estacoes/${idEstacao}/leituras`), limitToLast(5)), (snapshot) => {
             console.log(Object.entries(snapshot.val()));
             document.getElementById("tbLeituras").innerHTML =
                 `<tr>
@@ -51,6 +49,12 @@ onAuthStateChanged(auth, (user) => {
                 }).join("");
         }, {
             onlyOnce: false
+        });
+
+        onValue(ref(db, `usuarios/${user.uid}/estacoes/${idEstacao}/status/reserv`), (snapshot) => {
+            const nivel = snapshot.val() / 4 * 100;
+            document.getElementById("labelProgReservatorio").innerText = `Reservatório (${nivel}%)`;
+            document.getElementById("progReservatorio").value = nivel;
         })
     }
     else {

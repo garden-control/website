@@ -1,46 +1,37 @@
 <!DOCTYPE html>
-
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    
+    <link rel="stylesheet" href="css/estacao.css">
+    <link rel="stylesheet" href="css/estacao_configuracao.css">
+    
     <link rel="shortcut icon" href="" type="image/x-icon">
     <link rel="shortcut icon" href="images/tratorGC.jpg" type="image/tratorGC">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/estacao.css">
     <title>Gardening Control</title>
     <link href="css/responsive.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700&display=swap" rel="stylesheet">
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    
 
     <script type="module" src="js/estacao_configuracao.js"></script>
 </head>
-
 <body>
-
     <nav class="menu-lateral">
-
         <div class="btn-expandir">
-            <i class="bi bi-list" id="btn-exp"></i>
-        </div><!--btn-expandir-->
-
+            <i class="bi bi-arrow-left" id="btn-exp"></i>
+        </div>
         <ul>
-             <li class="item-menu ">
-                <a href="painel.html">
-                    <span class="icon"><i class="bi bi-arrow-left"></i></span>
-                    <span class="txt-link">Painel</span>
-                </a>
-            </li>
-            <li class="item-menu ">
+            <li class="item-menu">
                 <a name="linkPainelLateral" href="estacao_grafico.html">
                     <span class="icon"><i class="bi bi-thermometer-half"></i></span>
                     <span class="txt-link">Umidade do solo</span>
@@ -53,30 +44,59 @@
                 </a>
             </li>
             <li class="item-menu">
-                <a name="linkPainelLateral" href="estacao_informacao.html">
+                <a name="linkPainelLateral" href="estacao_exclamacao.html">
                     <span class="icon"><i class="bi bi-info-circle"></i></span>
                     <span class="txt-link">Exclamação</span>
                 </a>
             </li>
-
         </ul>
-
-    </nav><!--menu-lateral-->
+    </nav>
     <section class="do_section layout_padding">
         <div class="container">
             <div class="heading_container">
-                <h2>
-                    Configuração
-                </h2>
-                <span>Comandos</span>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-                <button>Enviar</button>
+                <h2>Configuração</h2>
+                <div class="configuracao-secao">
+                    <h3>Ligar/Desligar Bomba</h3>
+                    <div class="bomba-controls">
+                        <button id="ligarBtn" class="btn btn-success" disabled>Ligar Bomba</button>
+                        <button id="desligarBtn" class="btn btn-success" disabled>Desligar Bomba</button>
+                    </div>
+                    <hr>
+                    <h3>Pausar/Iniciar Controle de Umidade</h3>
+                    <button id="toggleUmidadeBtn" class="btn btn-success">Pausar Controle de Umidade</button>
+                    <hr>
+                    <h3>Configurar Umidade</h3>
+                    <form id="configuracaoUmidadeForm">
+                        <label for="umidadeMinima">Umidade Mínima:</label>
+                        <input type="number" id="umidadeMinima" name="umidadeMinima" step="0.01" min="0" max="1">
+                        <label for="umidadeMaxima">Umidade Máxima:</label>
+                        <input type="number" id="umidadeMaxima" name="umidadeMaxima" step="0.01" min="0" max="1">
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </form>
+                    <hr>
+                    <h3>Configurar Intervalo de Leituras</h3>
+                    <form id="configuracaoIntervaloLeituras">
+                        <label for="inputNumberIntervaloLeituras">Intervalo (s):</label>
+                        <input type="number" name="intervalo" id="inputNumberIntervaloLeituras" min="30" value="30">
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </form>
+                    <!-- Indisponível
+                        <h3>Configurar Horários de Irrigação</h3>
+                        <form id="configuracaoHorarioForm">
+                            <label for="horarioPermitido">Horário Permitido:</label>
+                            <input type="time" id="horarioPermitido" name="horarioPermitido">
+                            <label for="horarioNaoPermitido">Horário Não Permitido:</label>
+                            <input type="time" id="horarioNaoPermitido" name="horarioNaoPermitido">
+                            <button type="submit">Salvar</button>
+                        </form>
+                        <h3>Interface de Linha de Comando</h3>
+                        <textarea id="comandoInterface" rows="4" cols="50" placeholder="Digite seus comandos aqui..."></textarea>
+                        <button id="executarComandoBtn">Executar</button>
+                    -->
+                    </div>
             </div>
         </div>
     </section>
-
-
     <script src="js/estacao.js"></script>
 </body>
-
 </html>
