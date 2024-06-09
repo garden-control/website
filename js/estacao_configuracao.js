@@ -28,29 +28,29 @@ onAuthStateChanged(auth, (user) => {
         const idEstacao = urlParams.get("idEstacao");
         dbCaminhoEstacao = `usuarios/${user.uid}/estacoes/${idEstacao}`;
 
-        onValue(ref(db, dbCaminhoEstacao + "/variaveis/controlador/bomba"), (snapshot) => {
+        onValue(ref(db, dbCaminhoEstacao + "/variaveis/controlador_bomba"), (snapshot) => {
             const bombaLigada = snapshot.val();
             document.getElementById("ligarBtn").disabled = bombaLigada;
             document.getElementById("desligarBtn").disabled = !bombaLigada;
         });
 
-        onValue(ref(db, dbCaminhoEstacao + "/variaveis/controlador/ativo"), (snapshot) => {
+        onValue(ref(db, dbCaminhoEstacao + "/variaveis/controlador_ativo"), (snapshot) => {
             document.getElementById("toggleUmidadeBtn").innerText = 
                 snapshot.val() 
                     ? "Pausar Controle de Umidade"
                     : "Iniciar Controle de Umidade"
         });
 
-        onValue(ref(db, dbCaminhoEstacao + "/variaveis/controlador/umidade_max"), (snapshot) => {
+        onValue(ref(db, dbCaminhoEstacao + "/variaveis/controlador_umidade_max"), (snapshot) => {
             document.getElementById("umidadeMaxima").value = snapshot.val();
         });
 
 
-        onValue(ref(db, dbCaminhoEstacao + "/variaveis/controlador/umidade_min"), (snapshot) => {
+        onValue(ref(db, dbCaminhoEstacao + "/variaveis/controlador_umidade_min"), (snapshot) => {
             document.getElementById("umidadeMinima").value = snapshot.val();
         });
 
-        onValue(ref(db, dbCaminhoEstacao + "/variaveis/leituras/intervalo_s"), (snapshot) => {
+        onValue(ref(db, dbCaminhoEstacao + "/variaveis/leituras_intervalo_s"), (snapshot) => {
             document.getElementById("inputNumberIntervaloLeituras").value = snapshot.val();
         });
     }
@@ -62,7 +62,7 @@ onAuthStateChanged(auth, (user) => {
 
 document.getElementById("ligarBtn").addEventListener("click", () => {
     const updates = {};
-    updates["variaveis/controlador/bomba"] = true;
+    updates["variaveis/controlador_bomba"] = true;
     update(ref(db, dbCaminhoEstacao), updates)
     .then(() => console.log("Bomba ligada"))
     .catch(erro => console.error("Erro ao ligar a bomba: " + erro));
@@ -70,7 +70,7 @@ document.getElementById("ligarBtn").addEventListener("click", () => {
 
 document.getElementById("desligarBtn").addEventListener("click", () => {
     const updates = {};
-    updates["variaveis/controlador/bomba"] = false;
+    updates["variaveis/controlador_bomba"] = false;
     update(ref(db, dbCaminhoEstacao), updates)
     .then(() => console.log("Bomba desligada"))
     .catch(erro => console.error("Erro ao desligar a bomba: " + erro));
@@ -81,7 +81,7 @@ document.getElementById('toggleUmidadeBtn').addEventListener('click', function()
     if (dbCaminhoEstacao !== null)
     {
         const updates = {};
-        updates["variaveis/controlador/ativo"] = (btn.textContent === 'Iniciar Controle de Umidade');
+        updates["variaveis/controlador_ativo"] = (btn.textContent === 'Iniciar Controle de Umidade');
         update(ref(db, dbCaminhoEstacao), updates)
         .then(() => console.log("Controlador ligado/desligado com sucesso"))
         .catch(erro => console.error("Falha ao salvar: " + erro))
@@ -96,8 +96,8 @@ document.getElementById('configuracaoUmidadeForm').addEventListener('submit', fu
     // Código para salvar a configuração de umidade
     const updates = {};
 
-    updates["variaveis/controlador/umidade_min"] = umidadeMinima;
-    updates["variaveis/controlador/umidade_max"] = umidadeMaxima;
+    updates["variaveis/controlador_umidade_min"] = umidadeMinima;
+    updates["variaveis/controlador_umidade_max"] = umidadeMaxima;
 
     update(ref(db, dbCaminhoEstacao), updates)
     .then(() => alert(`Configurações salvas com sucesso!\nUmidade Mínima: ${umidadeMinima}, Umidade Máxima: ${umidadeMaxima}`))
@@ -110,7 +110,7 @@ document.getElementById("configuracaoIntervaloLeituras").addEventListener("submi
     const intervalo = Number(document.getElementById("inputNumberIntervaloLeituras").value);
 
     const updates = {};
-    updates["/variaveis/leituras/intervalo_s"] = intervalo;
+    updates["/variaveis/leituras_intervalo_s"] = intervalo;
     update(ref(db, dbCaminhoEstacao), updates)
     .then(() => alert(`Configurações salvas com sucesso!\nIntervalo: ${intervalo} segundos`))
     .catch(erro => alert("Erro ao salvar: " + erro));

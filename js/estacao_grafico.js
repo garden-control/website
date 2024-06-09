@@ -51,7 +51,7 @@ onAuthStateChanged(auth, (user) => {
             onlyOnce: false
         });
 
-        onValue(ref(db, `usuarios/${user.uid}/estacoes/${idEstacao}/status/reserv`), (snapshot) => {
+        onValue(ref(db, `usuarios/${user.uid}/estacoes/${idEstacao}/variaveis/reserv_nivel`), (snapshot) => {
             const nivel = snapshot.val() / 4 * 100;
             document.getElementById("labelProgReservatorio").innerText = `Reservatório (${nivel}%)`;
             document.getElementById("progReservatorio").value = nivel;
